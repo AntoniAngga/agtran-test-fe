@@ -22,20 +22,31 @@
     <v-card-actions>
       <v-btn color="info">Login</v-btn>
       <v-spacer></v-spacer>
-      <v-btn class="ma-2" tile color="primary">
-        <v-icon left>mdi-facebook</v-icon> Sign In With Facebook
-      </v-btn>
+      <facebookLogin class="button"
+      appId="1037034013419898"
+      @login="getUserData"
+      @logout="onLogout"
+      @get-initial-status="getUserData"></facebookLogin>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
+import facebookLogin from 'facebook-login-vuejs';
   export default {
     name: "Login",
+    components: {
+      facebookLogin,
+    },
     data() {
       return {
         showPassword: false
       }
     },
+    method: {
+      getUserData(data) {
+        console.log(data);
+      }
+    }
   }
 </script>
