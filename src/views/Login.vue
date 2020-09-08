@@ -1,69 +1,41 @@
 <template>
-  <v-app id="inspire">
-    <v-main>
-      <v-container
-        class="fill-height"
-        fluid
-      >
-        <v-row
-          align="center"
-          justify="center"
-        >
-          <v-col
-            cols="12"
-            sm="8"
-            md="4"
-          >
-            <v-card class="elevation-12">
-              <v-toolbar
-                color="primary"
-                dark
-                flat
-              >
-                <v-toolbar-title>Signin form</v-toolbar-title>
-                <v-spacer></v-spacer>
-                <v-tooltip bottom>
-                </v-tooltip>
-              </v-toolbar>
-              <v-card-text>
-                <v-form>
-                  <v-text-field
-                    label="Login"
-                    name="login"
-                    prepend-icon="mdi-account"
-                    type="text"
-                  ></v-text-field>
-
-                  <v-text-field
-                    id="password"
-                    label="Password"
-                    name="password"
-                    prepend-icon="mdi-lock"
-                    type="password"
-                  ></v-text-field>
-                </v-form>
-              </v-card-text>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn text small>You dont have account?</v-btn>
-              </v-card-actions>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="success">Login</v-btn>
-                <v-btn class="ma-2" tile color="primary">
-                  <v-icon left>mdi-facebook</v-icon> Sign IN With Facebook
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-main>
-  </v-app>
+  <v-card width="400px" class="mt-4 mx-auto">
+    <v-card-title>
+      <h1>Login</h1>
+    </v-card-title>
+    <v-card-text>
+      <v-from>
+        <v-text-field 
+        prepend-icon="mdi-account-circle" 
+        label="Email"
+        ></v-text-field>
+        <v-text-field 
+        prepend-icon="mdi-lock"
+        :type="!showPassword ? 'password' : 'text'"
+        label="Password"
+        :append-icon="!showPassword ? 'mdi-eye-off' : 'mdi-eye'"
+        @click:append="showPassword = !showPassword"
+        ></v-text-field>
+      </v-from>
+    </v-card-text>
+    <v-divider></v-divider>
+    <v-card-actions>
+      <v-btn color="info">Login</v-btn>
+      <v-spacer></v-spacer>
+      <v-btn class="ma-2" tile color="primary">
+        <v-icon left>mdi-facebook</v-icon> Sign In With Facebook
+      </v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>
   export default {
-    name: "Login"
+    name: "Login",
+    data() {
+      return {
+        showPassword: false
+      }
+    },
   }
 </script>
