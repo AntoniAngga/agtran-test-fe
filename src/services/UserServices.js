@@ -18,6 +18,6 @@ export default {
   //   return apiClient.get("/events/" + id);
   // },
   createUser(event) {
-    return apiClient.post("/events", event);
+    return apiClient.post("/api/v1/user", event);
   },
 };
