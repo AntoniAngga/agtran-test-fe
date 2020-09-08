@@ -1,5 +1,7 @@
 <template>
-  <v-card width="400px" class="mt-4 mx-auto">
+<div>
+
+  <v-card width="400px" class="mx-auto">
     <v-card-title>
       <h1>Register Account</h1>
     </v-card-title>
@@ -17,6 +19,15 @@
             <v-text-field  
             v-model="user.lastName"
             label="Last Name"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+             <v-text-field
+             type="date"
+            v-model="user.birthDate"
+            label="Birthdate"
             ></v-text-field>
           </v-col>
         </v-row>
@@ -53,25 +64,35 @@
     <v-card-actions>
       <v-btn color="info" :loading="this.loadingBtn" @click="submitForm">Create Account</v-btn>
       <v-spacer></v-spacer>
-      <v-btn color="error">Reset</v-btn>
+      <v-btn color="error" @click="reset">Reset</v-btn>
     </v-card-actions>
   </v-card>
+  <SnackBar :snackbar="this.snackbar" :text="this.text" ></SnackBar>
+</div>
 </template>
 
 
 <script>
   import UserServices from '@/services/UserServices.js'
+  import SnackBar from '@/components/SnackBar.vue'
+
   export default {
     name: "Signup",
+    components: {
+      SnackBar
+    },
     data() {
       return {
         user: {
           firstName: '',
           lastName: '',
           email: '',
+          birthDate: '',
           password: '',
           icNumber: ''
         },
+        text: "",
+        snackbar: false,
         showPassword: false,
         loadingBtn: false,
       }
@@ -82,9 +103,21 @@
         UserServices.createUser(this.user)
         .then( data => {
           console.log(data);
+          this.loadingBtn = false
+          this.snackbar = true
+          this.text = "Registration Complete, Please Sign In"
         }).catch(err => {
-          console.log(err);
+          this.snackbar = true
+          this.text = err
         })
+      },
+      reset() {
+        this.user.firstName = '';
+        this.user.lastName = '';
+        this.user.email = '';
+        this.user.birthDate = '';
+        this.user.password = '';
+        this.user.icNumber = '';
       }
     }
   }
