@@ -29,11 +29,11 @@ yarn lint
 
 ## Task
 
-- [✅] Init Project
-- [✅] Initialize Vuex, Routes, and Vuetify
-- [✅] Create Form Registration
-- [✅] Hit to the server Registration
-- [✅] Create Form Login
+- [x] Init Project
+- [x] Initialize Vuex, Routes, and Vuetify
+- [x] Create Form Registration
+- [x] Hit to the server Registration
+- [x] Create Form Login
 - [ ] Login with Facebook
 - [ ] Login with Manual JWT
 - [ ] Restrick Page if not Login
