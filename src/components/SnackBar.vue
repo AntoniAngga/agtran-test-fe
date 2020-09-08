@@ -1,9 +1,9 @@
 <template>
   <div class="text-center ma-2">
     <v-snackbar
-      v-model="snackbar"
+      v-model="this.snackbar.display"
     >
-      {{ text }}
+      {{ this.snackbar.text }}
 
       <template v-slot:action="{ attrs }">
         <v-btn
@@ -22,12 +22,17 @@
 <script>
   export default {
     name: "SnackBar",
-    props: {
-      text: String,
-      snackbar:{
-        type: Boolean,
-        default: false
+    // props: {
+    //   text: String,
+    //   snackbar:{
+    //     type: Boolean,
+    //     default: false
+    //   }
+    // },
+    computed: {
+      snackbar () {
+        return this.$store.snackBar
       }
-    },
+    }
   }
 </script>

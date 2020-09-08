@@ -14,6 +14,7 @@
     </v-app-bar>
     <v-content>
       <router-view></router-view>
+      <SnackBar ></SnackBar>
     </v-content>
     <Footer :links="links"></Footer>
   </v-app>
@@ -21,6 +22,7 @@
 
 <script>
 import Footer from '@/components/Footer.vue'
+
 
 export default {
   name: 'AppPage',

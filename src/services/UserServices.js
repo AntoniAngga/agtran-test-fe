@@ -17,7 +17,10 @@ export default {
   // getEvent(id) {
   //   return apiClient.get("/events/" + id);
   // },
-  createUser(event) {
-    return apiClient.post("/api/v1/user", event);
+  createUser(user) {
+    return apiClient.post("/api/v1/user", user);
   },
+  loginUser(user) {
+    return apiClient.post("/api/v1/auth/login", user);
+  }
 };

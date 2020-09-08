@@ -4,49 +4,64 @@
       <h1>Login</h1>
     </v-card-title>
     <v-card-text>
-      <v-from>
+      <v-form>
         <v-text-field 
         prepend-icon="mdi-account-circle" 
+        v-model="login.email"
         label="Email"
         ></v-text-field>
         <v-text-field 
         prepend-icon="mdi-lock"
+        v-model="login.password"
         :type="!showPassword ? 'password' : 'text'"
         label="Password"
         :append-icon="!showPassword ? 'mdi-eye-off' : 'mdi-eye'"
         @click:append="showPassword = !showPassword"
         ></v-text-field>
-      </v-from>
+      </v-form>
     </v-card-text>
     <v-divider></v-divider>
     <v-card-actions>
-      <v-btn color="info">Login</v-btn>
+      <v-btn color="info" @click="loginAuth">Login</v-btn>
       <v-spacer></v-spacer>
-      <facebookLogin class="button"
-      appId="1037034013419898"
-      @login="getUserData"
-      @logout="onLogout"
-      @get-initial-status="getUserData"></facebookLogin>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
-import facebookLogin from 'facebook-login-vuejs';
-  export default {
-    name: "Login",
-    components: {
-      facebookLogin,
+export default {
+  name: "Login",
+  data() {
+    return {
+      showPassword: false,
+      login: {
+        password: "",
+        email: ""
+      },
+      snackbar: {
+        display: false,
+        text: ""
+      },
+    }
+  },
+  methods: {
+    getUserData(data) {
+      console.log(data);
     },
-    data() {
-      return {
-        showPassword: false
-      }
-    },
-    method: {
-      getUserData(data) {
+    loginAuth() {
+      this.$store.dispatch('loginUser', this.login)
+      .then(data => {
+        this.snackbar.display = true;
+        this.snackbar.text = data.messages
+        this.$store.dispatch('toggleSnackBar', this.snackbar)
         console.log(data);
-      }
+      }).catch(err => {
+        this.snackbar.display = true;
+        this.snackbar.text = err
+        this.$store.dispatch('toggleSnackBar', this.snackbar)
+        console.log(err);
+      })
     }
   }
+}
 </script>
